@@ -1,6 +1,8 @@
 # Budget tracker
 
-View and manage your budget with an easy-to-use dashboard
+View and manage your budget with an easy-to-use dashboard.
+
+[Live demo](https://budget-tracker-dusky.vercel.app/)
 
 ### Step to use it
 
