@@ -10,12 +10,14 @@ export default {
     },
     data() {
         const budgetId: string = this.$route.params.budget as string;
+        const store = useBudgetStore();
+
         return {
             budgetId,
-            budget: this.store.budget.budgets[budgetId],
-            expenses: this.store.budget.budgets[budgetId].expenses.map((i) => ({ id: i, ...this.store.budget.expenses[i] })).reverse(),
+            budget: store.budget.budgets[budgetId],
+            expenses: store.budget.budgets[budgetId].expenses.map((i) => ({ id: i, ...store.budget.expenses[i] })).reverse(),
             showDrawer: false,
-            newLimit: this.store.budget.budgets[budgetId].limit,
+            newLimit: store.budget.budgets[budgetId].limit,
             newExpense: {
                 name: '',
                 amount: 0,
@@ -50,9 +52,6 @@ export default {
             const deleted = this.store.removeExpense(this.budgetId, id);
             if (deleted) {
                 this.expenses = this.expenses.filter((i: any) => {
-                    if (i.id === id) {
-                        this.budget.amount -= i.amount;
-                    }
                     return i.id !== id;
                 });
                 this.budget = this.store.budget.budgets[this.budgetId];

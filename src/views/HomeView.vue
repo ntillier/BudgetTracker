@@ -10,17 +10,19 @@ export default {
     return { store };
   },
   data() {
+    const store = useBudgetStore();
     const budgets = [];
-    for (let i of Object.keys(this.store.budget.budgets)) {
+
+    for (let i of Object.keys(store.budget.budgets)) {
       budgets.unshift({
         id: i,
-        ...this.store.budget.budgets[i]
+        ...store.budget.budgets[i]
       });
     }
     return {
       query: this.$route.query.query || '',
       regexp: getReg(this.$route.query.query as string || ''),
-      newLimit: this.store.budget.global.limit,
+      newLimit: store.budget.global.limit,
       budgets: budgets
     };
   },
